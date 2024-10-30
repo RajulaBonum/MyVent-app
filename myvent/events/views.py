@@ -10,6 +10,7 @@ from django.contrib import messages
 from .models import Event
 from .forms import EventForm
 
+
 @login_required
 def create_event(request):
     if request.method == 'POST':
@@ -59,3 +60,6 @@ def event_list(request):
 def event_detail(request, pk):
     event = get_object_or_404(Event, pk=pk)
     return render(request, 'events/event_detail.html', {'event': event})
+
+def home(request):
+    return render(request, 'events/home.html')
