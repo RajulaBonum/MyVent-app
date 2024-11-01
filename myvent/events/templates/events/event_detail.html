@@ -1,11 +1,32 @@
+<!-- templates/events/event_detail.html -->
 {% extends "base.html" %}
 {% block content %}
   <div class="container mt-4">
     <h2>{{ event.title }}</h2>
     <p><strong>Description:</strong> {{ event.description }}</p>
-    <p><strong>Location:</strong> {{ event.location }}</p>
     <p><strong>Date:</strong> {{ event.date }}</p>
-    <p><strong>Max Attendees:</strong> {{ event.max_attendees }}</p>
+    <p><strong>Location:</strong> {{ event.location_name }}</p>
+
+    <div id="map" style="height: 400px;"></div>  <!-- Google Map container -->
+
     <a href="{% url 'event-list' %}" class="btn btn-primary">Back to Events</a>
   </div>
+
+  <script>
+    function initMap() {
+      var eventLocation = { lat: {{ event.latitude }}, lng: {{ event.longitude }} };  // Event location
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: eventLocation,
+        zoom: 12
+      });
+
+      var marker = new google.maps.Marker({
+        position: eventLocation,
+        map: map
+      });
+    }
+  </script>
+
+  <!-- Include Google Maps JavaScript API -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"></script>
 {% endblock %}

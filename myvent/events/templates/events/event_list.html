@@ -1,21 +1,25 @@
+<!-- templates/events/event_list.html -->
 {% extends "base.html" %}
 {% block content %}
   <div class="container mt-4">
     <h2>Events</h2>
-    <a href="{% url 'create-event' %}" class="btn btn-primary mb-3">Create New Event</a>
-    <ul class="list-group">
-      {% for event in events %}
-        <li class="list-group-item">
-          <a href="{% url 'event-detail' event.pk %}">{{ event.title }}</a>
-          <span class="float-right">
-            <a href="{% url 'update-event' event.pk %}" class="btn btn-sm btn-warning">Edit</a>
-            <form action="{% url 'delete-event' event.pk %}" method="POST" style="display:inline;">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-            </form>
-          </span>
-        </li>
-      {% endfor %}
-    </ul>
+    
+    <form method="GET" class="form-inline mb-4">
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    {% if events %}
+      <ul class="list-group">
+        {% for event in events %}
+          <li class="list-group-item">
+            <a href="{% url 'event-detail' event.pk %}">{{ event.title }}</a>
+            <p>{{ event.location_name }} | {{ event.date }} | {{ event.category }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No events found matching your criteria.</p>
+    {% endif %}
   </div>
 {% endblock %}

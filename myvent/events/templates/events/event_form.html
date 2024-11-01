@@ -1,3 +1,4 @@
+<!-- templates/events/event_form.html -->
 {% extends "base.html" %}
 {% block content %}
   <div class="container mt-4">
@@ -5,7 +6,35 @@
     <form method="POST">
       {% csrf_token %}
       {{ form.as_p }}
+
+      <div id="map" style="height: 400px;"></div>  <!-- Google Map container -->
+
       <button type="submit" class="btn btn-primary">{% if form.instance.pk %}Update{% else %}Create{% endif %}</button>
     </form>
   </div>
+
+  <script>
+    function initMap() {
+      var defaultLocation = { lat: -34.397, lng: 150.644 };  // Default map center
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: defaultLocation,
+        zoom: 8
+      });
+
+      var marker = new google.maps.Marker({
+        position: defaultLocation,
+        map: map,
+        draggable: true  // Allow the marker to be moved
+      });
+
+      // Update latitude and longitude fields when marker is dragged
+      google.maps.event.addListener(marker, 'dragend', function(event) {
+        document.getElementById('id_latitude').value = event.latLng.lat();
+        document.getElementById('id_longitude').value = event.latLng.lng();
+      });
+    }
+  </script>
+
+  <!-- Include Google Maps JavaScript API -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"></script>
 {% endblock %}
