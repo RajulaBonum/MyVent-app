@@ -2,9 +2,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Welcome to MyVent</h1>
+<h1 class="text-center">Welcome to MyVent</h1>
 <p>This is the homepage.</p>
 <div>
-    <a href="{% url 'create-event' %}">Create and Event</a>
+    <a class="btn btn-primary" href="{% url 'create-event' %}">Create and Event</a>
 </div>
 {% endblock %}
