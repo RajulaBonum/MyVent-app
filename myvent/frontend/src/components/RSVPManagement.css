@@ -1,0 +1,31 @@
+/* src/components/RSVPManagement.css */
+.rsvp-management {
+    padding: 2rem;
+    background-color: #f9f9f9;
+}
+
+.rsvp-management h2 {
+    margin-bottom: 1.5rem;
+    color: #ff8c00;
+}
+
+.search-input {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.rsvp-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.rsvp-item {
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
